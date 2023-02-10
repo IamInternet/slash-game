@@ -39,5 +39,11 @@ public class playermovement : MonoBehaviour
 			rb.AddForce(Vector3.up * jumpForce);
 		}
 		rb.AddForce(Vector3.down * gravity * Time.deltaTime);
+
+		if (Input.GetKey(KeyCode.LeftArrow)){
+			groundCheck.Rotate(0f,-1f,0f);
+		} else if (Input.GetKey(KeyCode.RightArrow)){
+			groundCheck.Rotate(0f,1f,0f);
+		}
     }
 }
