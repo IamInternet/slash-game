@@ -14,6 +14,8 @@ public class playermovement : MonoBehaviour
 	public Transform groundCheck;
 	public LayerMask layerMask;
 	public bool isGrounded;
+	// var for slahsys
+	public MeshRenderer slash;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class playermovement : MonoBehaviour
     {
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
-		isGrounded = Physics.CheckSphere(groundCheck.position, 0.5f, layerMask);
+		isGrounded = Physics.CheckSphere(groundCheck.position, 0.6f, layerMask);
 
 		Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 		if (direction.magnitude >= 0.1f) {
@@ -41,9 +43,13 @@ public class playermovement : MonoBehaviour
 		rb.AddForce(Vector3.down * gravity * Time.deltaTime);
 
 		if (Input.GetKey(KeyCode.LeftArrow)){
-			groundCheck.Rotate(0f,-1f,0f);
+			groundCheck.Rotate(0f,-0.5f,0f);
 		} else if (Input.GetKey(KeyCode.RightArrow)){
-			groundCheck.Rotate(0f,1f,0f);
+			groundCheck.Rotate(0f,0.5f,0f);
+		}
+
+		if (Input.GetKeyDown(KeyCode.J)){
+			slash.enabled = !slash.enabled;
 		}
     }
 }
