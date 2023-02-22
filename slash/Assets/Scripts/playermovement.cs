@@ -19,10 +19,9 @@ public class playermovement : MonoBehaviour
 	public Transform playerTransform;
 	public LayerMask layerMask;
 	public bool isGrounded;
-	// var for script
-	public playermovement player;
-	// hitbox vars, we will use the other method of enable/disable. hopefully it works. basical.ly remove prefab, change into child.
+	// hitbox vars, we will use the other method of enable/disable. hopefully it works. basically remove prefab, change into child.
 	public GameObject test;
+	public int damage;
 
     // Start is called before the first frame update
     void Start()
@@ -64,9 +63,11 @@ public class playermovement : MonoBehaviour
 	/* Input: name of attack to use
 	spawns hitbox of requested attack, and if it's a special attack that needs multiple hits it will manage that as well */
 	public IEnumerator Attack(GameObject attack){
+		damage = 10;
 		// basic attack script
 		attack.SetActive(true);
 		yield return new WaitForSecondsRealtime(1);
 		attack.SetActive(false);
+		// switch statement for attacks?
 	}
 }

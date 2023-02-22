@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour
 {
-	int hp = 10;
+	// var for script
+	public playermovement player;
+
+	int hp = 50;
 
 	void OnTriggerEnter (Collider cInfo) {
 		if (cInfo.GetComponent<Collider>().tag == "Hitbox") {
-			hp--;
+			hp -= player.damage;
 			if (hp <= 0){
 				Destroy(gameObject);
 			}
