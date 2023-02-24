@@ -13,13 +13,14 @@ public class playermovement : MonoBehaviour
 	public float gravity;
 	// movement vars
 	public float speed;
+	bool canAttack = true;
 	Rigidbody rb;
 	// jumping vars
 	public float jumpForce;
 	public Transform playerTransform;
 	public LayerMask layerMask;
 	public bool isGrounded;
-	// hitbox vars, we will use the other method of enable/disable. hopefully it works. basically remove prefab, change into child.
+	// hitbox vars
 	public GameObject test;
 	public int damage;
 
@@ -55,19 +56,31 @@ public class playermovement : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown(KeyCode.J)){
-			Debug.Log("TAKE THIS!!!");
-			StartCoroutine("Attack", test);
+			if (canAttack){
+				Debug.Log("TAKE THIS!!!");
+				StartCoroutine("Attack", test);
+			}
 		}
     }
 
 	/* Input: name of attack to use
 	spawns hitbox of requested attack, and if it's a special attack that needs multiple hits it will manage that as well */
 	public IEnumerator Attack(GameObject attack){
-		damage = 10;
-		// basic attack script
-		attack.SetActive(true);
-		yield return new WaitForSecondsRealtime(1);
-		attack.SetActive(false);
-		// switch statement for attacks?
+		damage = 0;
+		
+
+		if (attack == test){
+			damage = 10;
+		}
+		if (attack != test){
+			// idk
+		} else{
+			// basic attack script
+			canAttack = false;
+			attack.SetActive(true);
+			yield return new WaitForSecondsRealtime(1);
+			attack.SetActive(false);
+			canAttack = true;
+		}
 	}
 }
