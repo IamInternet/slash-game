@@ -13,7 +13,7 @@ public class playermovement : MonoBehaviour
 	public float gravity;
 	// movement vars
 	public float speed;
-	bool canAttack = true;
+	bool canCancel = true;
 	bool canMove = true;
 	Rigidbody rb;
 	// jumping vars
@@ -22,11 +22,13 @@ public class playermovement : MonoBehaviour
 	public LayerMask layerMask;
 	public bool isGrounded;
 	// hitbox vars
+	private GameObject lastAttack;
 	public GameObject test;
 	public int damage;
 	// sword
 	public GameObject SW5A;
 	public GameObject SW5AA;
+	public GameObject SW5AAA;
 	// end hitbox vars
 
     // Start is called before the first frame update
@@ -61,14 +63,14 @@ public class playermovement : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown(KeyCode.J)){
-			if (canAttack){
+			if (canMove){
 				Debug.Log("TAKE THIS!!!");
 				StopAllCoroutines();
 				StartCoroutine("Attack", test);
 			}
 		}
 		if (Input.GetKeyDown(KeyCode.K)){
-			if (canAttack){
+			if (canMove || ((lastAttack == SW5A || SW5AA) && canCancel)){
 				Debug.Log("TAKE THAT!!!");
 				StopAllCoroutines();
 				StartCoroutine("Attack", SW5A);
@@ -88,20 +90,26 @@ public class playermovement : MonoBehaviour
 		if (attack == SW5A){
 			damage = 10;
 			if (!canMove){
-				damage = 20;
-				attack = SW5AA;
+				if (lastAttack == SW5A){
+					damage = 20;
+					attack = SW5AA;
+				} else if (lastAttack == SW5AA){
+					damage = 50;
+					attack = SW5AAA;
+				}
 			}
 		}
+		lastAttack = attack;
 
 			// basic attack script
-			canAttack = false;
+			canCancel = false;
 			canMove = false;
 			yield return new WaitForSecondsRealtime(0.2f);
 			attack.SetActive(true);
 			yield return new WaitForSecondsRealtime(0.2f);
 			attack.SetActive(false);
 			yield return new WaitForSecondsRealtime(0.5f);
-			canAttack = true;
+			canCancel = true;
 			yield return new WaitForSecondsRealtime(0.5f);
 			canMove = true;
 	}
