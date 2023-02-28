@@ -14,6 +14,7 @@ public class playermovement : MonoBehaviour
 	// movement vars
 	public float speed;
 	bool canAttack = true;
+	bool canMove = true;
 	Rigidbody rb;
 	// jumping vars
 	public float jumpForce;
@@ -23,6 +24,10 @@ public class playermovement : MonoBehaviour
 	// hitbox vars
 	public GameObject test;
 	public int damage;
+	// sword
+	public GameObject SW5A;
+	public GameObject SW5AA;
+	// end hitbox vars
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +40,10 @@ public class playermovement : MonoBehaviour
     {
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
-		isGrounded = Physics.CheckSphere(playerTransform.position, 0.6f, layerMask);
+		isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f, layerMask);
 
 		Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
-		if (direction.magnitude >= 0.1f) {
+		if (direction.magnitude >= 0.1f && canMove) {
 			if (isGrounded){
 				rb.AddForce(direction * (speed * 2) * Time.deltaTime);
 			} else rb.AddForce(direction * speed * Time.deltaTime);
@@ -58,7 +63,15 @@ public class playermovement : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.J)){
 			if (canAttack){
 				Debug.Log("TAKE THIS!!!");
+				StopAllCoroutines();
 				StartCoroutine("Attack", test);
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.K)){
+			if (canAttack){
+				Debug.Log("TAKE THAT!!!");
+				StopAllCoroutines();
+				StartCoroutine("Attack", SW5A);
 			}
 		}
     }
@@ -72,15 +85,24 @@ public class playermovement : MonoBehaviour
 		if (attack == test){
 			damage = 10;
 		}
-		if (attack != test){
-			// idk
-		} else{
+		if (attack == SW5A){
+			damage = 10;
+			if (!canMove){
+				damage = 20;
+				attack = SW5AA;
+			}
+		}
+
 			// basic attack script
 			canAttack = false;
+			canMove = false;
+			yield return new WaitForSecondsRealtime(0.2f);
 			attack.SetActive(true);
-			yield return new WaitForSecondsRealtime(1);
+			yield return new WaitForSecondsRealtime(0.2f);
 			attack.SetActive(false);
+			yield return new WaitForSecondsRealtime(0.5f);
 			canAttack = true;
-		}
+			yield return new WaitForSecondsRealtime(0.5f);
+			canMove = true;
 	}
 }

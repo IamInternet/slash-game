@@ -7,7 +7,7 @@ public class enemy : MonoBehaviour
 	// var for script
 	public playermovement player;
 
-	int hp = 50;
+	int hp = 200;
 
 	void OnTriggerEnter (Collider cInfo) {
 		if (cInfo.GetComponent<Collider>().tag == "Hitbox") {
