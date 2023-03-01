@@ -26,9 +26,16 @@ public class playermovement : MonoBehaviour
 	public GameObject test;
 	public int damage;
 	// sword
+	public GameObject SW2A;
+	public GameObject SW4A;
 	public GameObject SW5A;
 	public GameObject SW5AA;
+	public GameObject SW5A2A;
 	public GameObject SW5AAA;
+	public GameObject SW5AA8A;
+	public GameObject SW6A;
+	public GameObject SW6AA;
+	public GameObject SW8A;
 	// end hitbox vars
 
     // Start is called before the first frame update
@@ -38,8 +45,7 @@ public class playermovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
 		isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f, layerMask);
@@ -69,8 +75,21 @@ public class playermovement : MonoBehaviour
 				StartCoroutine("Attack", test);
 			}
 		}
+		// attack
 		if (Input.GetKeyDown(KeyCode.K)){
-			if (canMove || ((lastAttack == SW5A || SW5AA) && canCancel)){
+			if (Input.GetKey(KeyCode.W)){
+				if (canMove || canCancel){
+					Debug.Log("YRAGH!!!");
+					StopAllCoroutines();
+					StartCoroutine("Attack", SW8A);
+				}
+			}else if (Input.GetKey(KeyCode.D)){
+				if (canMove || canCancel){
+					Debug.Log("EAT THIS!!!");
+					StopAllCoroutines();
+					StartCoroutine("Attack", SW6A);
+				}
+			} else if (canMove || canCancel){
 				Debug.Log("TAKE THAT!!!");
 				StopAllCoroutines();
 				StartCoroutine("Attack", SW5A);
@@ -78,9 +97,9 @@ public class playermovement : MonoBehaviour
 		}
     }
 
-	/* Input: name of attack to use
-	spawns hitbox of requested attack, and if it's a special attack that needs multiple hits it will manage that as well */
-	public IEnumerator Attack(GameObject attack){
+	// Input: name of attack to use
+	// spawns hitbox of requested attack, and if it's a special attack that needs multiple hits it will manage that as well
+	IEnumerator Attack(GameObject attack){
 		damage = 0;
 		
 
@@ -98,6 +117,23 @@ public class playermovement : MonoBehaviour
 					attack = SW5AAA;
 				}
 			}
+		}
+		if (attack == SW6A){
+			damage = 30;
+			if (!canMove){
+				/*if (lastAttack == SW6A){
+					damage = 60;
+					attack = SW6AA;
+				}*/
+			}
+		}
+		if (attack == SW8A){
+			if (!canMove && SW5AA){
+					damage = 70;
+					attack = SW5AA8A;
+			} // else{
+			// this will be a special case that will call some unique code and end the function
+			damage = 50;
 		}
 		lastAttack = attack;
 
