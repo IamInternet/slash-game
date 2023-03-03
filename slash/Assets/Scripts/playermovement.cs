@@ -72,7 +72,7 @@ public class playermovement : MonoBehaviour
 			if (canMove){
 				Debug.Log("TAKE THIS!!!");
 				StopAllCoroutines();
-				StartCoroutine("Attack", test);
+				StartCoroutine("FindAttack", test);
 			}
 		}
 		// attack
@@ -81,25 +81,25 @@ public class playermovement : MonoBehaviour
 				if (canMove || canCancel){
 					Debug.Log("YRAGH!!!");
 					StopAllCoroutines();
-					StartCoroutine("Attack", SW8A);
+					StartCoroutine("FindAttack", SW8A);
 				}
 			}else if (Input.GetKey(KeyCode.D)){
 				if (canMove || canCancel){
 					Debug.Log("EAT THIS!!!");
 					StopAllCoroutines();
-					StartCoroutine("Attack", SW6A);
+					StartCoroutine("FindAttack", SW6A);
 				}
 			} else if (canMove || canCancel){
 				Debug.Log("TAKE THAT!!!");
 				StopAllCoroutines();
-				StartCoroutine("Attack", SW5A);
+				StartCoroutine("FindAttack", SW5A);
 			}
 		}
     }
 
 	// Input: name of attack to use
-	// spawns hitbox of requested attack, and if it's a special attack that needs multiple hits it will manage that as well
-	IEnumerator Attack(GameObject attack){
+	// finds an attack and calls function to perform it
+	IEnumerator FindAttack(GameObject attack){
 		damage = 0;
 		
 
@@ -121,32 +121,58 @@ public class playermovement : MonoBehaviour
 		if (attack == SW6A){
 			damage = 30;
 			if (!canMove){
-				/*if (lastAttack == SW6A){
+				if (lastAttack == SW6A){
 					damage = 60;
 					attack = SW6AA;
-				}*/
+				}
 			}
 		}
 		if (attack == SW8A){
-			if (!canMove && SW5AA){
+			if (!canMove && lastAttack == SW5AA){
 					damage = 70;
 					attack = SW5AA8A;
-			} // else{
-			// this will be a special case that will call some unique code and end the function
-			damage = 50;
+			} else{
+				// this will be a special case that will call some unique code and end the function
+				damage = 80;
+				rb.AddForce(Vector3.up * jumpForce * 2);
+				yield return new WaitForSecondsRealtime(0.5f);
+				while (true){
+					// prevents a freeze, don't change this
+					if (!isGrounded) yield return new WaitForSecondsRealtime(0.2f); else break;
+				}
+				canCancel = false;
+				canMove = false;
+				attack.SetActive(true);
+				yield return new WaitForSecondsRealtime(0.2f);
+				attack.SetActive(false);
+				yield return new WaitForSecondsRealtime(0.5f);
+				canMove = true;
+				lastAttack = attack;
+				// replace above with function
+			}
 		}
+
+		StartCoroutine(DoAttack(attack,0.1f,0.2f,0.3f,0.5f));
+	}
+	// attack script, used by above method
+	// 
+	IEnumerator DoAttack(GameObject attack, float startup, float active, float cancelw, float recovery){
 		lastAttack = attack;
 
-			// basic attack script
-			canCancel = false;
-			canMove = false;
-			yield return new WaitForSecondsRealtime(0.2f);
-			attack.SetActive(true);
-			yield return new WaitForSecondsRealtime(0.2f);
-			attack.SetActive(false);
-			yield return new WaitForSecondsRealtime(0.5f);
+		canCancel = false;
+		canMove = false;
+		yield return new WaitForSecondsRealtime(startup);
+		attack.SetActive(true);
+		yield return new WaitForSecondsRealtime(active);
+		attack.SetActive(false);
+		if (cancelw != -1){
+			yield return new WaitForSecondsRealtime(cancelw);
 			canCancel = true;
-			yield return new WaitForSecondsRealtime(0.5f);
+			yield return new WaitForSecondsRealtime(recovery - cancelw);
 			canMove = true;
+		} else {
+			yield return new WaitForSecondsRealtime(recovery);
+			canMove = true;
+		}
 	}
 }
