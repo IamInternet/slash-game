@@ -134,29 +134,24 @@ public class playermovement : MonoBehaviour
 			} else{
 				// this will be a special case that will call some unique code and end the function
 				damage = 80;
-				rb.AddForce(Vector3.up * jumpForce * 2);
+				rb.AddForce(Vector3.up * jumpForce);
+				rb.AddForce(Vector3.forward * jumpForce);
 				yield return new WaitForSecondsRealtime(0.5f);
 				while (true){
 					// prevents a freeze, don't change this
 					if (!isGrounded) yield return new WaitForSecondsRealtime(0.2f); else break;
 				}
-				canCancel = false;
-				canMove = false;
-				attack.SetActive(true);
-				yield return new WaitForSecondsRealtime(0.2f);
-				attack.SetActive(false);
-				yield return new WaitForSecondsRealtime(0.5f);
-				canMove = true;
-				lastAttack = attack;
-				// replace above with function
+
+				StartCoroutine(DoAttack(attack,0.0f,0.2f,0.5f,-1));
+				yield break;
 			}
 		}
 
-		StartCoroutine(DoAttack(attack,0.1f,0.2f,0.3f,0.5f));
+		StartCoroutine(DoAttack(attack,0.1f,0.2f,0.5f,0.3f));
 	}
 	// attack script, used by above method
 	// 
-	IEnumerator DoAttack(GameObject attack, float startup, float active, float cancelw, float recovery){
+	IEnumerator DoAttack(GameObject attack, float startup, float active, float recovery, float cancelw){
 		lastAttack = attack;
 
 		canCancel = false;
