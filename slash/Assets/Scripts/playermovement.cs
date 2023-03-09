@@ -14,6 +14,7 @@ public class playermovement : MonoBehaviour
 	// movement vars
 	public float speed;
 	bool canCancel = true;
+	bool canJCancel = true;
 	bool canMove = true;
 	Rigidbody rb;
 	// jumping vars
@@ -57,10 +58,12 @@ public class playermovement : MonoBehaviour
 			} else rb.AddForce(direction * speed * Time.deltaTime);
 		}
 			
-		if (Input.GetKeyDown(KeyCode.Space) && isGrounded){
+		if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJCancel){
 			rb.AddForce(Vector3.up * jumpForce);
+			canMove = true;
+			canCancel = true;
 		}
-		rb.AddForce(Vector3.down * gravity * Time.deltaTime);
+		if (canMove) rb.AddForce(Vector3.down * gravity * Time.deltaTime);
 
 		if (Input.GetKey(KeyCode.LeftArrow)){
 			playerTransform.Rotate(0f,-0.5f,0f);
@@ -78,18 +81,30 @@ public class playermovement : MonoBehaviour
 		// attack
 		if (Input.GetKeyDown(KeyCode.K)){
 			if (Input.GetKey(KeyCode.W)){
-				if (canMove || canCancel){
+				if (canCancel){
 					Debug.Log("YRAGH!!!");
 					StopAllCoroutines();
 					StartCoroutine("FindAttack", SW8A);
 				}
+			}else if (Input.GetKey(KeyCode.S)){
+				if (canCancel){
+					Debug.Log("CONTRUCTION ATTACK!");
+					StopAllCoroutines();
+					StartCoroutine("FindAttack", SW2A);
+				}
 			}else if (Input.GetKey(KeyCode.D)){
-				if (canMove || canCancel){
+				if (canCancel){
 					Debug.Log("EAT THIS!!!");
 					StopAllCoroutines();
 					StartCoroutine("FindAttack", SW6A);
 				}
-			} else if (canMove || canCancel){
+			}else if (Input.GetKey(KeyCode.A)){
+					if (canCancel){
+						Debug.Log("I'll PROVE that this is a circle!");
+						StopAllCoroutines();
+						StartCoroutine("FindAttack", SW5A);
+					}
+			} else if (canCancel){
 				Debug.Log("TAKE THAT!!!");
 				StopAllCoroutines();
 				StartCoroutine("FindAttack", SW5A);
@@ -107,14 +122,28 @@ public class playermovement : MonoBehaviour
 			damage = 10;
 		}
 		if (attack == SW5A){
-			damage = 10;
+			damage = 20;
 			if (!canMove){
 				if (lastAttack == SW5A){
 					damage = 20;
 					attack = SW5AA;
 				} else if (lastAttack == SW5AA){
-					damage = 50;
+					damage = 40;
 					attack = SW5AAA;
+					StartCoroutine(DoAttack(attack,0.1f,0.2f,0.5f,-1f));
+					yield break;
+				}
+			}
+		}
+		if (attack == SW2A){
+			damage = 10;
+			attack = SW5A2A;
+			if (!canMove){
+				if (lastAttack == SW5A){
+					damage = 20;
+					attack = SW5A2A;
+					StartCoroutine(DoAttack(attack,0.2f,0.2f,0.5f,-1f));
+					yield break;
 				}
 			}
 		}
@@ -134,20 +163,25 @@ public class playermovement : MonoBehaviour
 			} else{
 				// this will be a special case that will call some unique code and end the function
 				damage = 80;
+				canCancel = false;
+				canJCancel = false;
 				rb.AddForce(Vector3.up * jumpForce);
 				rb.AddForce(Vector3.forward * jumpForce);
-				yield return new WaitForSecondsRealtime(0.5f);
+				yield return new WaitForSecondsRealtime(0.2f);
 				while (true){
 					// prevents a freeze, don't change this
 					if (!isGrounded) yield return new WaitForSecondsRealtime(0.2f); else break;
 				}
 
 				StartCoroutine(DoAttack(attack,0.0f,0.2f,0.5f,-1));
+				rb.velocity = Vector3.zero;
+				rb.angularVelocity = Vector3.zero;
+				rb.Sleep();
 				yield break;
 			}
 		}
 
-		StartCoroutine(DoAttack(attack,0.1f,0.2f,0.5f,0.3f));
+		StartCoroutine(DoAttack(attack,0.1f,0.2f,0.5f,0.1f));
 	}
 	// attack script, used by above method
 	// 
@@ -168,6 +202,8 @@ public class playermovement : MonoBehaviour
 		} else {
 			yield return new WaitForSecondsRealtime(recovery);
 			canMove = true;
+			canCancel = true;
 		}
+		canJCancel = true;
 	}
 }
