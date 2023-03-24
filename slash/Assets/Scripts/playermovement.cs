@@ -62,7 +62,7 @@ public class playermovement : MonoBehaviour
 			canMove = true;
 			canCancel = true;
 		}
-		if ((canCancel || lastAttack == (SW8A || SW2A))) rb.AddForce(Vector3.down * gravity * Time.deltaTime);
+		if (canCancel || lastAttack == SW8A || lastAttack == SW2A) rb.AddForce(Vector3.down * gravity * Time.deltaTime);
 
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			playerTransform.Rotate(0f, -0.5f, 0f);
@@ -136,9 +136,24 @@ public class playermovement : MonoBehaviour
 			damage = 50;
 			attack = SW2A;
 			rb.AddForce(Vector3.up * jumpForce * 1.5f);
+			lastAttack = attack;
+			rb.velocity = Vector3.zero;
+			rb.angularVelocity = Vector3.zero;
+
+			canCancel = false;
 			canMove = false;
-			// won't call do attack, because this case is special in the attack lasts until you touch the ground
-			StartCoroutine(DoAttack(attack, 0.1f, 0.35f, 0.7f, -1f));
+			yield return new WaitForSecondsRealtime(0.1f);
+			attack.SetActive(true);
+			yield return new WaitForSecondsRealtime(0.35f);
+			attack.SetActive(false);
+			yield return new WaitForSecondsRealtime(0.5f);
+			while (true) {
+				// prevents a freeze, don't change this
+				if (!isGrounded) yield return new WaitForSecondsRealtime(0.2f); else break;
+			}
+			canMove = true;
+			canJCancel = true;
+			canCancel = true;
 			yield break;
 		}
 		if (attack == SW6A) {

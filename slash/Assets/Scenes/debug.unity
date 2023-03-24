@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 95981924}
   - component: {fileID: 95981923}
   - component: {fileID: 95981922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-5AA8A
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 188637352}
   - component: {fileID: 188637351}
   - component: {fileID: 188637350}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-4A
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 548279569}
   - component: {fileID: 548279568}
   - component: {fileID: 548279567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-5AA
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 566095704}
   - component: {fileID: 566095703}
   - component: {fileID: 566095702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-6AA
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 752018575}
   - component: {fileID: 752018574}
   - component: {fileID: 752018573}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-2A
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -873,7 +873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1003174418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitboxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 1069972130}
   - component: {fileID: 1069972129}
   - component: {fileID: 1069972128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-5AAA
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 1171617470}
   - component: {fileID: 1171617469}
   - component: {fileID: 1171617468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-5A2A
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -1143,7 +1143,7 @@ GameObject:
   - component: {fileID: 1224165270}
   - component: {fileID: 1224165269}
   - component: {fileID: 1224165268}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-5A
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -1240,7 +1240,7 @@ GameObject:
   - component: {fileID: 1377658838}
   - component: {fileID: 1377658837}
   - component: {fileID: 1377658836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-8A
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -1465,7 +1465,7 @@ GameObject:
   - component: {fileID: 2067700672}
   - component: {fileID: 2067700671}
   - component: {fileID: 2067700670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW-6A
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
