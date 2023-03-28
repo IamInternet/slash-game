@@ -189,8 +189,16 @@ public class playermovement : MonoBehaviour
 			}
 		}
 		if (attack == SW4A) {
+			damage = 10;
+			canMove = false;
+			rb.velocity = Vector3.zero;
+			rb.angularVelocity = Vector3.zero;
+			yield return new WaitForSecondsRealtime(0.2f);
+			for (int i = 0; i < 5; i++){
+				yield return StartCoroutine(DoAttack(attack, 0.0f, 0.1f, 0.05f, -1f));
+			}
 			damage = 50;
-			StartCoroutine(DoAttack(attack, 0.1f, 0.5f, 0.5f, -1f));
+			StartCoroutine(DoAttack(attack, 0.2f, 0.3f, 0.5f, -1f));
 			yield break;
 		}
 
