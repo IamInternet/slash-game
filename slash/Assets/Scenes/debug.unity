@@ -2191,7 +2191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 2000
-  speed: 1500
+  speed: 1750
+  cam: {fileID: 963194228}
   jumpForce: 1000
   playerTransform: {fileID: 2092084590}
   layerMask:

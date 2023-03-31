@@ -1,12 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
-dev notes basically:
-StartCoroutine, 
-attack method should be a coroutine, allows it to stop. useful for multi hits, and will be used to stop hitboxes
-if enable/disable doesn't work, try disable trigger in the object. IT WORKED though
-*/
 
 public class playermovement : MonoBehaviour
 {
@@ -16,6 +10,7 @@ public class playermovement : MonoBehaviour
 	bool canCancel = true;
 	bool canJCancel = true;
 	bool canMove = true;
+	public Transform cam;
 	Rigidbody rb;
 	// jumping vars
 	public float jumpForce;
@@ -49,9 +44,18 @@ public class playermovement : MonoBehaviour
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
 		isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f, layerMask);
-
-		Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+		
+		Vector3 direction = Vector3.zero;
+		if (horizontal != 0 || vertical != 0) {
+             Vector3 right = cam.right;
+             Vector3 forward = Vector3.Cross(right, Vector3.up);
+             direction = (right * horizontal) + (forward * vertical);
+		}
+		direction = Vector3.Normalize(direction);
+		Vector3.ClampMagnitude(direction, speed);
 		if (direction.magnitude >= 0.1f && canMove) {
+			// uncomment when camera fixed
+			// playerTransform.rotation = Quaternion.LookRotation(direction);
 			if (isGrounded) {
 				rb.AddForce(direction * (speed * 2) * Time.deltaTime);
 			} else rb.AddForce(direction * speed * Time.deltaTime);
