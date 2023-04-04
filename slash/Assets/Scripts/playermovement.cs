@@ -18,11 +18,12 @@ public class playermovement : MonoBehaviour
 	public LayerMask layerMask;
 	public bool isGrounded;
 	// hitbox vars
-	private GameObject lastAttack;
+	public GameObject lastAttack;
 	public int damage;
 	// sword
 	public GameObject SW2A;
 	public GameObject SW4A;
+	public GameObject SW4AA;
 	public GameObject SW5A;
 	public GameObject SW5AA;
 	public GameObject SW5A2A;
@@ -44,6 +45,7 @@ public class playermovement : MonoBehaviour
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
 		isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f, layerMask);
+		 // Debug.Log(horizontal + ", " + vertical);
 		
 		Vector3 direction = Vector3.zero;
 		if (horizontal != 0 || vertical != 0) {
@@ -180,7 +182,7 @@ public class playermovement : MonoBehaviour
 				canCancel = false;
 				canJCancel = false;
 				rb.AddForce(Vector3.up * jumpForce);
-				rb.AddForce(Vector3.forward * jumpForce);
+				rb.AddForce((Vector3.Cross(cam.right, Vector3.up)) * jumpForce * 2);
 				yield return new WaitForSecondsRealtime(0.2f);
 				while (true) {
 					// prevents a freeze, don't change this
@@ -202,7 +204,7 @@ public class playermovement : MonoBehaviour
 				yield return StartCoroutine(DoAttack(attack, 0.0f, 0.1f, 0.05f, -1f));
 			}
 			damage = 50;
-			StartCoroutine(DoAttack(attack, 0.2f, 0.3f, 0.5f, -1f));
+			StartCoroutine(DoAttack(SW4AA, 0.2f, 0.3f, 0.5f, -1f));
 			yield break;
 		}
 
