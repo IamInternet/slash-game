@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class playermovement : MonoBehaviour
 {
+	public int hp = 1000;
 	public float gravity;
 	// movement vars
 	public float speed;
@@ -63,7 +64,7 @@ public class playermovement : MonoBehaviour
 			} else rb.AddForce(direction * speed * Time.deltaTime);
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJCancel) {
+		if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJCancel && (lastAttack != SW4A)) {
 			rb.AddForce(Vector3.up * jumpForce);
 			canMove = true;
 			canCancel = true;
@@ -204,8 +205,9 @@ public class playermovement : MonoBehaviour
 			rb.angularVelocity = Vector3.zero;
 			yield return new WaitForSecondsRealtime(0.2f);
 			for (int i = 0; i < 5; i++){
-				yield return StartCoroutine(DoAttack(attack, 0.0f, 0.1f, 0.05f, -1f));
+				yield return StartCoroutine(DoAttack(attack, 0.05f, 0.1f, 0.0f, -1f));
 			}
+			canJCancel = false;
 			damage = 50;
 			StartCoroutine(DoAttack(SW4AA, 0.2f, 0.3f, 0.5f, -1f));
 			yield break;
@@ -245,6 +247,11 @@ public class playermovement : MonoBehaviour
 			Debug.Log("GAH!");
 			StopAllCoroutines();
 			StartCoroutine("Stun", 0.5f);
+			hp -= cInfo.transform.parent.GetComponent<swordghost>().damage; // move damage to enemy script to make this work with multiple enemies
+			if (hp <= 0){
+				Destroy(gameObject); // change scene to game over instead of destroy
+			}
+			Debug.Log(hp);
 		}
 	}
 

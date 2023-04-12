@@ -11,7 +11,7 @@ public class enemy : MonoBehaviour
 	public Transform pt;
 	public LayerMask layerMask;
 	public bool isGrounded;
-	int hp = 2000;
+	public int hp;
 
 	void Update() {
 		rb.AddForce(Vector3.down * 10000 * Time.deltaTime);
@@ -108,8 +108,7 @@ public class enemy : MonoBehaviour
 					rb.AddForce(Vector3.up * 300000 * Time.deltaTime);
 				}
 			}
-
+			Debug.Log(hp);
 		}
-		Debug.Log(hp);
 	}
 }
