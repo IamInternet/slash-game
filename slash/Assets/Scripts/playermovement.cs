@@ -113,6 +113,9 @@ public class playermovement : MonoBehaviour
 	// Input: name of attack to use
 	// finds an attack and calls function to perform it
 	IEnumerator FindAttack(GameObject attack) {
+		if (lastAttack != null) {
+			lastAttack.SetActive(false);
+        }
 		damage = 0;
 
 
@@ -233,6 +236,30 @@ public class playermovement : MonoBehaviour
 			canMove = true;
 			canCancel = true;
 		}
+		canJCancel = true;
+	}
+
+	// die
+	void OnTriggerEnter (Collider cInfo) {
+		if (cInfo.GetComponent<Collider>().tag == "Enemy Hitbox") {
+			Debug.Log("GAH!");
+			StopAllCoroutines();
+			StartCoroutine("Stun", 0.5f);
+		}
+	}
+
+	IEnumerator Stun(float time) {
+		if (lastAttack != null) {
+			lastAttack.SetActive(false);
+        }
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = Vector3.zero;
+
+		canCancel = false;
+		canMove = false;
+		yield return new WaitForSecondsRealtime(time);
+		canMove = true;
+		canCancel = true;
 		canJCancel = true;
 	}
 }

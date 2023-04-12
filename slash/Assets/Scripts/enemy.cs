@@ -12,12 +12,10 @@ public class enemy : MonoBehaviour
 	public LayerMask layerMask;
 	public bool isGrounded;
 	int hp = 2000;
-	double stun = 0; // if > 0 will not run enemy behaviour
 
 	void Update() {
 		rb.AddForce(Vector3.down * 10000 * Time.deltaTime);
 		isGrounded = Physics.CheckSphere(et.position, 2.5f, layerMask);
-		Debug.Log(isGrounded);
 	}
 
 	void OnTriggerEnter (Collider cInfo) {
@@ -27,7 +25,6 @@ public class enemy : MonoBehaviour
 			Vector3 forward = Vector3.Cross(right, Vector3.up);
 			
 			hp -= player.damage;
-			stun += 30;
 			if (hp <= 0){
 				Destroy(gameObject);
 			}
