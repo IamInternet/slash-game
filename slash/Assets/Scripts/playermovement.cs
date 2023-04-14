@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class playermovement : MonoBehaviour
 {
@@ -73,9 +74,9 @@ public class playermovement : MonoBehaviour
 		}
 		if (canCancel || lastAttack == SW8A || lastAttack == SW2A) rb.AddForce(Vector3.down * gravity * Time.deltaTime);
 
-		if (Input.GetKey(KeyCode.LeftArrow)) {
+		if (Input.GetKey(KeyCode.J)) {
 			playerTransform.Rotate(0f, -0.5f, 0f);
-		} else if (Input.GetKey(KeyCode.RightArrow)) {
+		} else if (Input.GetKey(KeyCode.L)) {
 			playerTransform.Rotate(0f, 0.5f, 0f);
         }
 
@@ -251,7 +252,7 @@ public class playermovement : MonoBehaviour
 			StartCoroutine("Stun", 0.5f);
 			hp -= cInfo.transform.parent.GetComponent<swordghost>().damage; // move damage to enemy script to make this work with multiple enemies
 			if (hp <= 0){
-				Destroy(gameObject); // change scene to game over instead of destroy
+				SceneManager.LoadScene("GameOver");
 			}
 			hpDisplay.text = "HP: " + hp;
 		}

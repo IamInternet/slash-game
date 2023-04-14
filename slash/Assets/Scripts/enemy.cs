@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class enemy : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class enemy : MonoBehaviour
 	public LayerMask layerMask;
 	public bool isGrounded;
 	public int hp;
+	public int maxHp;
+	public Text hpDisplay;
+	
+	void Start()
+	{
+		maxHp = hp;
+	}
 
 	void Update() {
 		rb.AddForce(Vector3.down * 10000 * Time.deltaTime);
@@ -23,6 +31,7 @@ public class enemy : MonoBehaviour
 			// right and left are relative to player
 			Vector3 right = pt.right;
 			Vector3 forward = Vector3.Cross(right, Vector3.up);
+			hpDisplay.text = hp.ToString() + "/" + maxHp.ToString();
 			
 			hp -= player.damage;
 			if (hp <= 0){
@@ -108,7 +117,6 @@ public class enemy : MonoBehaviour
 					rb.AddForce(Vector3.up * 300000 * Time.deltaTime);
 				}
 			}
-			Debug.Log(hp);
 		}
 	}
 }
