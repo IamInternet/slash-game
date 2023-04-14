@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playermovement : MonoBehaviour
 {
 	public int hp = 1000;
 	public float gravity;
+	public Text hpDisplay;
 	// movement vars
 	public float speed;
 	bool canCancel = true;
@@ -251,7 +253,7 @@ public class playermovement : MonoBehaviour
 			if (hp <= 0){
 				Destroy(gameObject); // change scene to game over instead of destroy
 			}
-			Debug.Log(hp);
+			hpDisplay.text = "HP: " + hp;
 		}
 	}
 
