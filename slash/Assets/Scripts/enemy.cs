@@ -31,12 +31,12 @@ public class enemy : MonoBehaviour
 			// right and left are relative to player
 			Vector3 right = pt.right;
 			Vector3 forward = Vector3.Cross(right, Vector3.up);
-			hpDisplay.text = hp.ToString() + "/" + maxHp.ToString();
 			
 			hp -= player.damage;
 			if (hp <= 0){
 				Destroy(gameObject);
 			}
+			hpDisplay.text = hp.ToString() + "/" + maxHp.ToString();
 			if (player.lastAttack == player.SW5A) {
 				rb.AddForce(forward * 10000 * Time.deltaTime);
 				if (!isGrounded) {

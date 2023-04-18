@@ -3,7 +3,12 @@ guid: 0f37e8986e8b4d34f8b7bed1219f6e39
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - rb: {instanceID: 0}
+  - et: {instanceID: 0}
+  - pt: {fileID: 5904366601277784617, guid: d5de94f5883c3cd48b6fc34ce60583cc, type: 3}
+  - hpDisplay: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -14,6 +14,7 @@ public class swordghost : MonoBehaviour
     public GameObject eattack;
     private int cd;
     public int damage;
+    public int distance;
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +41,12 @@ public class swordghost : MonoBehaviour
 		Vector3 forward = Vector3.Cross(right, Vector3.up);
         if (stun <= 0) {
             if (cd < 0) {
-                if (Vector3.Distance(et.position, pt.position) < 3) {
+                if (Vector3.Distance(et.position, pt.position) < distance) {
                     rb.velocity = Vector3.zero;
 		            rb.angularVelocity = Vector3.zero;
                     cd = 100000;
                     damage = 100;
-                    StartCoroutine(DoAttack(eattack, 0.4f, 0.1f, 60));
+                    StartCoroutine(DoAttack(eattack, 0.5f, 0.1f, 60));
                 } else {
                     rb.AddForce(forward * 8000 * Time.deltaTime);
                 }
