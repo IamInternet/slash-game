@@ -42,7 +42,7 @@ public class spawner : MonoBehaviour
             Enemy.GetComponent<enemy>().pt = escript.pt;
             Enemy.GetComponent<enemy>().layerMask = escript.layerMask;
             Enemy.GetComponent<enemy>().hpDisplay = escript.hpDisplay;
-            cd = 300000000; // for test
+            cd = maxcd
         }
         Debug.Log(cd);
         cd--;
