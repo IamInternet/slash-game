@@ -49,6 +49,9 @@ public class playermovement : MonoBehaviour
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
 		isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f, layerMask);
+		if (!canMove && lastAttack == SW2A) {
+
+        }
 		 // Debug.Log(horizontal + ", " + vertical);
 		
 		Vector3 direction = Vector3.zero;

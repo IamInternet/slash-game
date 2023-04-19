@@ -11,7 +11,7 @@ public class swordghost : MonoBehaviour
 	public LayerMask layerMask;
 	public bool isGrounded;
     private float stun;
-    public GameObject eattack;
+    private GameObject eattack;
     private int cd;
     public int damage;
     public int distance;
@@ -21,6 +21,7 @@ public class swordghost : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         et = GetComponent<Transform>();
+        eattack = this.gameObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
