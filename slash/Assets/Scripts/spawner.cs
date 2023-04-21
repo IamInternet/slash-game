@@ -11,8 +11,8 @@ public class spawner : MonoBehaviour
     enemy escript;
     // information for spawned enemy
     public playermovement player;
-	public Transform pt;
-	public LayerMask layerMask;
+    public Transform pt;
+    public LayerMask layerMask;
     public GameObject eattack;
     public int distance;
     public int hp;
@@ -26,7 +26,7 @@ public class spawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (cd < 1){
             GameObject Enemy = Instantiate(prefab,new Vector3(et.position.x, et.position.y, et.position.z + 5), Quaternion.identity);
@@ -42,9 +42,9 @@ public class spawner : MonoBehaviour
             Enemy.GetComponent<enemy>().pt = escript.pt;
             Enemy.GetComponent<enemy>().layerMask = escript.layerMask;
             Enemy.GetComponent<enemy>().hpDisplay = escript.hpDisplay;
-            cd = maxcd
+            cd = maxcd;
         }
-        Debug.Log(cd);
+        // Debug.Log(cd);
         cd--;
     }
 }

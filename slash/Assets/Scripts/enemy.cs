@@ -19,6 +19,8 @@ public class enemy : MonoBehaviour
 	void Start()
 	{
 		maxHp = hp;
+		et = GetComponent<Transform>();
+		rb = GetComponent<Rigidbody>();
 	}
 
 	void Update() {
