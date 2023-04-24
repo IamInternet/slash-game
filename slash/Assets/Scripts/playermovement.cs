@@ -50,7 +50,7 @@ public class playermovement : MonoBehaviour
 		float vertical = Input.GetAxisRaw("Vertical");
 		isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f, layerMask);
 		if (!canMove && lastAttack == SW2A) {
-
+			isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f);
         }
 		 // Debug.Log(horizontal + ", " + vertical);
 		
@@ -63,7 +63,6 @@ public class playermovement : MonoBehaviour
 		direction = Vector3.Normalize(direction);
 		Vector3.ClampMagnitude(direction, speed);
 		if (direction.magnitude >= 0.1f && canMove) {
-			// uncomment when camera fixed
 			// playerTransform.rotation = Quaternion.LookRotation(direction);
 			if (isGrounded) {
 				rb.AddForce(direction * (speed * 2) * Time.deltaTime);
