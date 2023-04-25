@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class title : MonoBehaviour
 {
-
+    public Text t;
     // Update is called once per frame
     void Update()
     {
@@ -14,6 +15,9 @@ public class title : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D)) {
             SceneManager.LoadScene("debug");
+        }
+        if (Input.GetKeyDown(KeyCode.H)) {
+            t.text = "Use WASD to move.\nUse K to attack, and J or L to move the camera\nAttacking while holding a direction gives unique attacks\nSee movelist.txt for a full list of attacks\n\nPress ENTER to begin";
         }
     }
 }

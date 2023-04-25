@@ -35,6 +35,9 @@ public class enemy : MonoBehaviour
 			Vector3 forward = Vector3.Cross(right, Vector3.up);
 			
 			hp -= player.damage;
+			player.points += (int)(player.damage * 10 * player.pointsMult);
+			player.pointDisplay.text = "Score: " + player.points;
+			player.pointsMult += 0.1;
 			if (hp <= 0){
 				Destroy(gameObject);
 			}
