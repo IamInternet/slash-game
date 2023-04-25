@@ -37,6 +37,10 @@ public class playermovement : MonoBehaviour
 	public GameObject SW6AA;
 	public GameObject SW8A;
 	// end hitbox vars
+	// points
+	public int points = 0;
+	public double pointsMult = 1.0;
+	public Text pointDisplay;
 
 	// Start is called before the first frame update
 	void Start()
@@ -250,6 +254,7 @@ public class playermovement : MonoBehaviour
 	void OnTriggerEnter (Collider cInfo) {
 		if (cInfo.GetComponent<Collider>().tag == "Enemy Hitbox") {
 			Debug.Log("GAH!");
+			pointsMult = 1;
 			StopAllCoroutines();
 			StartCoroutine("Stun", 0.5f);
 			hp -= cInfo.transform.parent.GetComponent<swordghost>().damage; // move damage to enemy script to make this work with multiple enemies
