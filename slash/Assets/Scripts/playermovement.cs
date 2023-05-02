@@ -16,6 +16,8 @@ public class playermovement : MonoBehaviour
 	bool canMove = true;
 	public Transform cam;
 	Rigidbody rb;
+	public Animator playerAnim;
+	public bool walking;
 	// jumping vars
 	public float jumpForce;
 	public Transform playerTransform;
@@ -85,7 +87,31 @@ public class playermovement : MonoBehaviour
 		} else if (Input.GetKey(KeyCode.L)) {
 			playerTransform.Rotate(0f, 0.5f, 0f);
         }
-
+		// animations
+		if(Input.GetKeyUp(KeyCode.W)){
+			playerAnim.ResetTrigger("walk");
+			playerAnim.SetTrigger("idle");
+			walking = false;
+			//steps1.SetActive(false);
+		}
+		if(Input.GetKeyUp(KeyCode.S)){
+			playerAnim.ResetTrigger("walkback");
+			playerAnim.SetTrigger("idle");
+			//steps1.SetActive(false);
+		}
+		if (canMove) {
+			if(Input.GetKeyDown(KeyCode.W)){
+			playerAnim.SetTrigger("walk");
+			playerAnim.ResetTrigger("idle");
+			walking = true;
+			//steps1.SetActive(true);
+			}
+			if(Input.GetKeyDown(KeyCode.S)){
+				playerAnim.SetTrigger("walkback");
+				playerAnim.ResetTrigger("idle");
+				//steps1.SetActive(true);
+			}
+		}
 		// attack
 		if (Input.GetKeyDown(KeyCode.K)) {
 			if (Input.GetKey(KeyCode.W)) {
