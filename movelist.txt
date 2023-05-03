@@ -1,0 +1,11 @@
+Input: move description
+K: basic slash
+KK: basic slash
+KSK : launcher
+KKK: knockaway slash
+KKWK: stab for big damage but low aoe
+WK: advancing attack, a leap forward for big damage (Air OK)
+SK: high launching DP (Air OK)
+AK: spin attack
+DK: attack behind
+DKK: knockdown attack

@@ -39,6 +39,8 @@ public class enemy : MonoBehaviour
 			player.pointDisplay.text = "Score: " + player.points;
 			player.pointsMult += 0.1;
 			if (hp <= 0){
+				player.hp += 10;
+				player.hpDisplay.text = "HP: " + player.hp;
 				Destroy(gameObject);
 			}
 			hpDisplay.text = hp.ToString() + "/" + maxHp.ToString();
