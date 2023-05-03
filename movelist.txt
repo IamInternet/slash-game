@@ -8,4 +8,4 @@ WK: advancing attack, a leap forward for big damage (Air OK)
 SK: high launching DP (Air OK)
 AK: spin attack
 DK: attack behind
-DKK: knockdown attack
+DKK: knockdown attack behind

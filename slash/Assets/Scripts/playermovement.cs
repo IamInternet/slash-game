@@ -99,7 +99,27 @@ public class playermovement : MonoBehaviour
 			playerAnim.SetTrigger("idle");
 			//steps1.SetActive(false);
 		}
+		if(Input.GetKeyUp(KeyCode.A)){
+			playerAnim.ResetTrigger("strafeL");
+			playerAnim.SetTrigger("idle");
+			//steps1.SetActive(false);
+		}
+		if(Input.GetKeyUp(KeyCode.D)){
+			playerAnim.ResetTrigger("strafeR");
+			playerAnim.SetTrigger("idle");
+			//steps1.SetActive(false);
+		}
 		if (canMove) {
+			if(Input.GetKeyDown(KeyCode.A)){
+				playerAnim.SetTrigger("strafeL");
+				playerAnim.ResetTrigger("idle");
+				//steps1.SetActive(true);
+			}
+			if(Input.GetKeyDown(KeyCode.D)){
+				playerAnim.SetTrigger("strafeR");
+				playerAnim.ResetTrigger("idle");
+				//steps1.SetActive(true);
+			}
 			if(Input.GetKeyDown(KeyCode.W)){
 			playerAnim.SetTrigger("walk");
 			playerAnim.ResetTrigger("idle");
@@ -186,6 +206,7 @@ public class playermovement : MonoBehaviour
 			rb.angularVelocity = Vector3.zero;
 
 			canCancel = false;
+			canJCancel = false;
 			canMove = false;
 			yield return new WaitForSecondsRealtime(0.1f);
 			attack.SetActive(true);
