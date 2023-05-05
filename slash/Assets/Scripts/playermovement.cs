@@ -83,9 +83,9 @@ public class playermovement : MonoBehaviour
 		if (canCancel || lastAttack == SW8A || lastAttack == SW2A) rb.AddForce(Vector3.down * gravity * Time.deltaTime);
 
 		if (Input.GetKey(KeyCode.J)) {
-			playerTransform.Rotate(0f, -0.5f, 0f);
+			playerTransform.Rotate(0f, -500f * Time.deltaTime, 0f);
 		} else if (Input.GetKey(KeyCode.L)) {
-			playerTransform.Rotate(0f, 0.5f, 0f);
+			playerTransform.Rotate(0f, 500f * Time.deltaTime, 0f);
         }
 		// animations
         /*
@@ -236,6 +236,7 @@ public class playermovement : MonoBehaviour
 			if (!canMove && lastAttack == SW5AA) {
 				damage = 70;
 				attack = SW5AA8A;
+				StartCoroutine(DoAttack(attack, 0.1f, 0.2f, 0.5f, -1f));
 			} else {
 				// this will be a special case that will call some unique code and end the function
 				lastAttack = attack;
