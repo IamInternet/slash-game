@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Gate : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class Gate : MonoBehaviour
 
 	if (collision.gameObject.CompareTag("Player"))
 	{
-	    Debug.Log("Collided with the player!");
+	    SceneManager.LoadScene("GameOver");
 	}
   }
 }

@@ -88,6 +88,7 @@ public class playermovement : MonoBehaviour
 			playerTransform.Rotate(0f, 0.5f, 0f);
         }
 		// animations
+        /*
 		if(Input.GetKeyUp(KeyCode.W)){
 			playerAnim.ResetTrigger("walk");
 			playerAnim.SetTrigger("idle");
@@ -131,7 +132,7 @@ public class playermovement : MonoBehaviour
 				playerAnim.ResetTrigger("idle");
 				//steps1.SetActive(true);
 			}
-		}
+		}*/
 		// attack
 		if (Input.GetKeyDown(KeyCode.K)) {
 			if (Input.GetKey(KeyCode.W)) {
