@@ -4,16 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
 public class Gate : MonoBehaviour
 {
- void OnCollisionEnter (Collision collision)
-  {
+  public GameObject[] array;
 
-	if (collision.gameObject.CompareTag("Player"))
-	{
-	    SceneManager.LoadScene("GameOver");
-	}
+  void OnCollisionEnter (Collision collision)
+  {
+    if (collision.gameObject.CompareTag("Player"))
+    {	    
+      array = GameObject.FindGameObjectsWithTag("SPAWNER");
+      if (array.Length == 0)
+      {
+        SceneManager.LoadScene("GameOver");
+      } else
+      {
+        // Add UI Quick Tip Here: "Destroy All Spawners To Win!"
+      }
+    }
   }
 }
-
-	
