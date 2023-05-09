@@ -17,7 +17,7 @@ public class title : MonoBehaviour
             SceneManager.LoadScene("debug");
         }
         if (Input.GetKeyDown(KeyCode.H)) {
-            t.text = "Use WASD to move.\nUse K to attack, and J or L to move the camera\nAttacking while holding a direction gives unique attacks\nSee movelist.txt for a full list of attacks\n\nPress ENTER to begin";
+            t.text = "Use WASD to move.\nUse K to attack, and J or L to move the camera\nAttacking while holding a direction gives unique attacks\nSee movelist.txt for a full list of attacks\nDestroy all spawners then find the gate to win\nPress ENTER to begin";
         }
     }
 }
