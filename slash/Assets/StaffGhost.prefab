@@ -221,7 +221,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   isGrounded: 0
-  hp: 200
+  hp: 100
   maxHp: 0
   hpDisplay: {fileID: 0}
 --- !u!114 &815838490448616564

@@ -37,7 +37,7 @@ public class spawner : MonoBehaviour
             Enemy.GetComponent<swordghost>().pt = this.pt;
             Enemy.GetComponent<swordghost>().distance = this.distance;
             // set enemy.cs vars
-            Enemy.GetComponent<enemy>().hp = this.hp;
+            // Enemy.GetComponent<enemy>().hp = this.hp;
             Enemy.GetComponent<enemy>().player = escript.player;
             Enemy.GetComponent<enemy>().pt = escript.pt;
             Enemy.GetComponent<enemy>().layerMask = escript.layerMask;
