@@ -54,10 +54,10 @@ public class playermovement : MonoBehaviour
 	void Update() {
 		float horizontal = Input.GetAxisRaw("Horizontal");
 		float vertical = Input.GetAxisRaw("Vertical");
-		isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f, layerMask);
+		isGrounded = Physics.CheckSphere(playerTransform.position, 1.6f, layerMask);
 		if (!canMove && lastAttack == SW2A) {
-			isGrounded = Physics.CheckSphere(playerTransform.position, 1.5f);
-        }
+			isGrounded = Physics.CheckSphere(playerTransform.position, 1.6f);
+		}
 		 // Debug.Log(horizontal + ", " + vertical);
 		
 		Vector3 direction = Vector3.zero;
