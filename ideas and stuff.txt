@@ -1,0 +1,63 @@
+doing anim rn - stafe -various bugfixes
+
+-purple guy nerf - making jumping work better vs him, less hp?
+-redo level balance, less enemy
+-sto getiing stuck fisx the FLOOR~!!!!! THIS IS IMPORATANT GRRRR
+-5XX8X is weird maybe fix idk //done
+
+
+1. UI polish
+	a. title screen image
+	b. game over image
+	c. health icon?
+	d. enemy health icon?
+	e. scale correctly
+4. visuals/model
+5. fix updates
+
+maybe spawners should be red?
+
+don't forget sfx, discuss this
+
+weapons: sword, staff, fists, knife/similar
+knife will have a cancel, throw, teleport stuff
+movelists:
+Only one attack button will be used, dubbed "A", aka "X". Numpad notation used
+SWORD:
+5A: top-right to bottom-left slash (Air OK)
+5AA: mid-left to mid-right (Air OK)
+5A2A : launcher
+5AAA: backhand finisher, opposite direction of 5AA, good aoe and knockdown
+5AA8A: stab for big damage but low aoe
+8A: advancing attack, a leap forward for big damage (Air OK)
+2A: high launching DP (Air OK)
+4A: spin attack
+6A: attack behind
+6AA: knockdown attack
+J5AAA: slash downward
+J5AA2A: slash upward
+J8A: no longer leaps forward, just goes down
+
+STAFF:
+5A: poke
+5AA: mid-left to mid-right (slight decline)
+5AAA: wide mid-right to mid-left (Air OK)
+5AA8A: slam
+8A: pulls target in (Air OK)
+2A: swings all around (Air OK)
+4A: swing to left side, cancels like 5AA
+6A: swing to right side, cancels like 5AA
+J5A: top-left to mid-right
+J5AA: mid-right to mid-left, slight incline. hit twice
+J2A: moves up and sends enemies up
+
+KNIFE:
+5A: middle-right to middle-left
+5AA: opposite of 5A
+8A: knife throw, knife gets stuck in enemy. press again to return, teleport to enemy (Air OK)
+2A: knife throw, knife teleports behind enemy. press again to return, enemy teleports to you (Air OK)
+2A (mid animation): puts character back into neutral state (Air OK) (10 second CD)
+4A: teleport left (Air OK)
+4AA: slash mid teleport (Air OK)
+6A: teleport right (Air OK)
+6AA: slash mid teleport (Air OK)

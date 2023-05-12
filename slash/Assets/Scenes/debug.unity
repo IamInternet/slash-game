@@ -1680,7 +1680,7 @@ MonoBehaviour:
     m_Bits: 55
   isGrounded: 0
   hp: 100000
-  maxHp: 0
+  maxHp: 100000
   hpDisplay: {fileID: 204411710}
 --- !u!54 &1238885749
 Rigidbody:
