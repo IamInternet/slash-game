@@ -284,6 +284,7 @@ public class playermovement : MonoBehaviour
 		canMove = false;
 		yield return new WaitForSecondsRealtime(startup);
 		attack.SetActive(true);
+		this.GetComponent<AudioSource>().Play(0);
 		yield return new WaitForSecondsRealtime(active);
 		attack.SetActive(false);
 		if (cancelw != -1f) {

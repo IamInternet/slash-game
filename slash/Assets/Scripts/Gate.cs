@@ -16,7 +16,7 @@ public class Gate : MonoBehaviour
         array = GameObject.FindGameObjectsWithTag("SPAWNER");
         if (array.Length == 0)
         {
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameWin");
         } else
         {
             // Add UI Quick Tip Here: "Destroy All Spawners To Win!"
