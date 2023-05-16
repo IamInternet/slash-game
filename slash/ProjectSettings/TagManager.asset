@@ -7,6 +7,9 @@ TagManager:
   - Hitbox
   - Enemy Hitbox
   - SPAWNER
+  - ScytheGhost
+  - StaffGhost
+  - SwordGhost
   layers:
   - Default
   - TransparentFX

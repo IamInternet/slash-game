@@ -25,5 +25,9 @@ public class title : MonoBehaviour
             Application.Quit();
             Debug.Log("QuitApplication");
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 }

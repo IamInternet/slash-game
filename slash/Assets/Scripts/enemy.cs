@@ -15,6 +15,7 @@ public class enemy : MonoBehaviour
 	public int hp;
 	public int maxHp;
 	public Text hpDisplay;
+	public GameManager gameManager;
 	
 	void Start()
 	{
@@ -41,7 +42,11 @@ public class enemy : MonoBehaviour
 			if (hp <= 0){
 				player.hp += 10;
 				player.hpDisplay.text = "HP: " + player.hp;
-				Destroy(gameObject);
+                if (gameObject.tag == "SPAWNER")
+                {
+					gameManager.SpawnerDestroyed();
+                }
+                Destroy(gameObject);
 			}
 			hpDisplay.text = hp.ToString() + "/" + maxHp.ToString();
 			if (player.lastAttack == player.SW5A) {
